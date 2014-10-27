@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}GovLab Academy Projet Gallery{% endblock %}
+
+{% block content %}
+
+<h1>Projects</h1>
+
+<ul>
+{% for project in projects %}
+
+<li><a href="{{project.link}}">{{project.name}}</a>
+</li>	
+
+{% endfor %}
+</ul>
+
+{% endblock %}
