@@ -37,6 +37,8 @@ def Main():
       template_data = {}
       for i, item in enumerate(FIELDS):
         template_data[item] = row[i]
+      if template_data['project_title'] == "":
+        continue
       html = template.render(template_data)
       projectUniqueName = createUniqueName(template_data['project_title'])
       with open('gen/%s.html' % projectUniqueName, 'w') as g:
@@ -46,7 +48,7 @@ def Main():
     f.close()
   template = env.get_template('all_projects.html')
   print >> sys.stderr, len(all_projects)
-  with open('gen/all_projects.html', 'w') as g:
+  with open('gen/index.html', 'w') as g:
     g.write(template.render({'projects': all_projects}))
     g.close()
 if __name__ == '__main__':
