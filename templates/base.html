@@ -5,17 +5,44 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link rel="stylesheet" href="../scss/styles.css">
     <title>{% block title %}{% endblock %}</title>
 
   </head>
 
 <body>
-
+<nav class="b-navigation" role="navigation">
+    <h2 class="e-nav-title">Menu</h2>
+    <a href="#">Home</a>
+    <a target="__new__" href="http://thegovlab.org">GovLab</a>
+    <a href="#">Library</a>
+    <a href="#">Project Gallery</a>
+    <a href="#">Courses</a>
+    <a href="#">Fall 2014 Class</a>
+    <a href="#">Fall 2014 PODs</a>
+    <a href="#">Project Canvas</a>
+    <!-- <a href="/faq">FAQ</a> -->
+    <a href="mailto:info-academy@thegovlab.org">Contact Us</a>
+  </nav>
+  
+  <div class="b-top-layer">
+    <header role="header">
+      <div class="b-centered">
+        <span id="main-navigation-trigger" class="e-trigger icon-menu"></span>
+        
+        <div class="b-branding">
+          <a href="#" class="e-govlab-logo"><img src="/assets/govlab-logo.png" alt=""></a>
+          <span class="e-academy-logo"><img src="/assets/academy-logo.png" alt=""></span>
+          
+        </div>
+      </div>
+    </header>
+  </div>
+	<div class="b-centered">
 {% block content %}
 	<!-- this is where you put the content -->
 	{% endblock %}
-
+	</div>
 </body>
 
   </html>
