@@ -15,12 +15,8 @@
     <h2 class="e-nav-title">Menu</h2>
     <a href="#">Home</a>
     <a target="__new__" href="http://thegovlab.org">GovLab</a>
-    <a href="#">Library</a>
-    <a href="#">Project Gallery</a>
-    <a href="#">Courses</a>
-    <a href="#">Fall 2014 Class</a>
-    <a href="#">Fall 2014 PODs</a>
-    <a href="#">Project Canvas</a>
+    <a href="http://academy.thegovlab.org/library">Library</a>
+    <a href="http://academy.thegovlab.org/courses">Courses</a>
     <!-- <a href="/faq">FAQ</a> -->
     <a href="mailto:info-academy@thegovlab.org">Contact Us</a>
   </nav>
@@ -39,10 +35,17 @@
     </header>
   </div>
 	<div class="b-centered">
-{% block content %}
+  {% block content %}
 	<!-- this is where you put the content -->
 	{% endblock %}
 	</div>
+  <footer class="b-footer" >
+
+      <div class="row">
+        <p class="e-creative-commons">This work by GovLab is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.</p>
+      </div>
+
+    </footer>
 </body>
 
   </html>
