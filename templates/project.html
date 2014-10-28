@@ -8,28 +8,27 @@
   'truonex_link', 'problem', 'why_compelling', 'summary',
   'tags', 'status', 'affiliation', 'country', 'class_of', 'online'
  #}
+<article class="b-project-section">
+	<div class="header">
+		<h1>{{project_title}}</h1>
+		<span class="e-status">Status <span class="m-status-{{status}}">{{status}}</span></span> | <a href="{{truonex_link}}" target="_blank">External Project Page</a>
+		<p class="e-tags">Tags: {{tags}}</p>
+		</div>
 
-<h1>{{project_title}}</h1>
+	<section>
+		<h2>Problem you are solving</h2>
+		<p>{{problem}}</p>
+	</section>
+	
+	<section>
+		<h2>Why this is compelling?</h2>
+		<p>{{why_compelling}}</p>
+	</section>
 
-<h2>Problem you are solving</h2>
-<div>{{problem}}</div>
-
-<h2>Why this is compelling?</h2>
-<div>{{why_compelling}}</div>
-
-<h2>Summary</h2>
-<div>{{summary}}</div>
-
-<h2>Tags</h2>
-<div>{{tags}}</div>
-
-<h2>Status</h2>
-<div>{{tags}}</div>
-
-<h2>Status</h2>
-<div>{{status}}</div>
-
-<h2>External link for the project</h2>
-<a href="{{truonex_link}}">{{truonex_link}}</a>
+	<section>
+		<h2>Summary</h2>
+		<p>{{summary}}</p>
+	</section>	
+</article>
 
 {% endblock %}
