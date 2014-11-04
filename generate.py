@@ -25,6 +25,15 @@ def Main():
   env = Environment(loader=FileSystemLoader(TEMPLATES_DIR),
       extensions=['jinja2.ext.with_'])
 
+
+  for page in ['about', 'offerings', 'index', 'resources']:
+    template = env.get_template('%s.html' % page)
+    html = template.render()
+    with open('gen/%s.html' % page, 'w') as f:
+      f.write(html.encode('utf8'))
+      f.close()
+
+  # START Gallery 
   template = env.get_template('project.html')
 
   FIELDS = ['name', 'project_title', 'team_name',
@@ -48,8 +57,10 @@ def Main():
     f.close()
   template = env.get_template('all_projects.html')
   print >> sys.stderr, len(all_projects)
-  with open('gen/index.html', 'w') as g:
+  with open('gen/gallery.html', 'w') as g:
     g.write(template.render({'projects': all_projects}))
     g.close()
+  # Gallery END
+
 if __name__ == '__main__':
   Main()

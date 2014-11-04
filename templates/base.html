@@ -5,35 +5,18 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../scss/styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	  <link rel="stylesheet" href="./scss/styles.css">
     <title>{% block title %}{% endblock %}</title>
 
   </head>
 
 <body>
-<nav class="b-navigation" role="navigation">
-    <h2 class="e-nav-title">Menu</h2>
-    <a href="#">Home</a>
-    <a target="__new__" href="http://thegovlab.org">GovLab</a>
-    <a href="http://academy.thegovlab.org/library">Library</a>
-    <a href="http://academy.thegovlab.org/courses">Courses</a>
-    <!-- <a href="/faq">FAQ</a> -->
-    <a href="mailto:info-academy@thegovlab.org">Contact Us</a>
-  </nav>
-  
-  <div class="b-top-layer">
-    <header role="header">
-      <div class="b-centered">
-        <span id="main-navigation-trigger" class="e-trigger icon-menu"></span>
-        
-        <div class="b-branding">
-          <a href="#" class="e-govlab-logo"><img src="/assets/govlab-logo.png" alt=""></a>
-          <span class="e-academy-logo"><img src="/assets/academy-logo.png" alt=""></span>
-          
-        </div>
-      </div>
-    </header>
-  </div>
+
+{% include 'nav.html' %}
+{% include 'branding-top.html' %}  
+
 	<div class="b-centered">
   {% block content %}
 	<!-- this is where you put the content -->
@@ -41,11 +24,14 @@
 	</div>
   <footer class="b-footer" >
 
-      <div class="row">
-        <p class="e-creative-commons">This work by GovLab is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.</p>
-      </div>
+    <div class="row">
+      <p class="e-creative-commons">This work by GovLab is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.</p>
+    </div>
 
-    </footer>
+  </footer>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 </body>
 
   </html>

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}GovLab Academy Offerings{% endblock %}
+
+{% block content %}
+
+<h1>Offerings from the GovLab Academy</h1>
+
+<section>
+	<h2>Overview</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</section>
+
+<section>
+<h2 id="courses">Courses</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+
+{% set items = ['course 1', 'course 2', 'course 3', '...'] %}
+<div class="b-project-list">
+<ul>
+{% for item in items %}
+  <li><a class='e-card-button' href='#'>{{item}}</a></li>
+{% endfor %}
+</ul>
+</div>
+
+</section>
+
+<section>
+<h2 id="coaching-programs">On-line Project Coaching Programs</h2>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+{% set items = ['coaching 1', 'coaching 2', 'coaching 3', '...'] %}
+<div class="b-project-list">
+<ul>
+{% for item in items %}
+  <li><a class='e-card-button' href='#'>{{item}}</a></li>
+{% endfor %}
+</ul>
+</div>
+
+</section>
+
+<section>
+<h2 id="workshops">Workshops</h2>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+{% set items = ['workshop 1', 'workshop 2', 'workshop 3', '...'] %}
+<div class="b-project-list">
+<ul>
+{% for item in items %}
+  <li><a class='e-card-button' href='#'>{{item}}</a></li>
+{% endfor %}
+</ul>
+</div>
+
+</section>
+
+{% endblock %}
