@@ -53,8 +53,10 @@ def Main():
       with open('gen/%s.html' % projectUniqueName, 'w') as g:
         g.write(html)
         g.close()
-      all_projects.append({ 'name': template_data['project_title'], 'link': "%s.html" % projectUniqueName})
+      template_data['link'] = "%s.html" % projectUniqueName
+      all_projects.append(template_data)
     f.close()
+
   template = env.get_template('all_projects.html')
   print >> sys.stderr, len(all_projects)
   with open('gen/gallery.html', 'w') as g:

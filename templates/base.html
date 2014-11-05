@@ -5,9 +5,13 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	  <link rel="stylesheet" href="./scss/styles.css">
+    <link rel="stylesheet" href="./assets/icomoon/style2.css">
+
     <title>{% block title %}{% endblock %}</title>
 
   </head>
@@ -17,11 +21,11 @@
 {% include 'nav.html' %}
 {% include 'branding-top.html' %}  
 
-	<div class="b-centered">
+	<!-- <div class="b-centered"> -->
   {% block content %}
 	<!-- this is where you put the content -->
 	{% endblock %}
-	</div>
+	<!-- </div> -->
   <footer class="b-footer" >
 
     <div class="row">
@@ -30,7 +34,19 @@
 
   </footer>
 
+<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="./assets/jquery.expander.min.js"></script>
+<script src="./assets/jquery.isotope.min.js"></script>
+
+<script>
+// More info at https://github.com/kswedberg/jquery-expander .
+$(document).ready(function() {
+  
+  {% block document_ready_script %}{% endblock %}
+
+});
+</script>
 
 </body>
 

@@ -3,8 +3,14 @@
 
 {% block content %}
 
-<h1>Projects</h1>
+<div class="b-centered">
 
+
+<h1>Projects ({{projects|length}})</h1>
+
+<p>this is where we will put the filters once we have some decent tags.</p>
+
+{#
 <div class="b-project-list">
 <ul>
 {% for project in projects %}
@@ -12,5 +18,43 @@
 {% endfor %}
 </ul>
 </div>
+#}
 
+<div id="project-container">
+	{% for project in projects %}
+	<div class="b-library-item m-people">
+		<div style="font-weight:bold;">{{project.project_title}}&nbsp; <a href="{{project.link}}"><i class="fa fa-external-link"></i></a></div>
+		<div class="expandable"><u>Problem</u>: <p>{{project.problem}}</p></div>
+		<div><u>Tags</u>: <p>{{project.tags}}</p></div>
+		<div class="expandable"><u>Summary</u>: <p>{{project.summary}}</p></div>
+	</div>
+	{% endfor %}
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+{% endblock %}
+
+{% block document_ready_script %}
+
+$('div.expandable p').expander({
+    slicePoint:       200,  // default is 100
+    expandPrefix:     ' ', // default is '... '
+    expandText:       '<i class="fa fa-plus-square-o"></i>', // default is 'read more'
+    collapseTimer:    0, // re-collapses after 5 seconds; default is 0, so no re-collapsing
+    userCollapseText: '<i class="fa fa-minus-square-o"></i>'  // default is 'read less'
+  });
+
+var $container = $('#project-container'), filters = {};
+$container.isotope({
+  itemSelector : '.b-library-item',
+  layoutMode: 'fitRows',
+  masonry: {
+     columnWidth: 80
+   }
+	});
 {% endblock %}

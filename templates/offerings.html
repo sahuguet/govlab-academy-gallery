@@ -3,33 +3,31 @@
 
 {% block content %}
 
+<div class="b-centered">
+
 <h1>Offerings from the GovLab Academy</h1>
 
 <section>
 	<h2>Overview</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<p>The Academy is the GovLab’s educational and training initiative focused on bringing citizen-driven innovation to pressing public problems.</p>
+
+<p>What are public problems? Often they involve inefficiencies in governance including instances when local agencies fail to provide services, spend public funds, and manage operations in accordance with citizen interests. But public problems also exist outside of government. The ease with which we can hail a cab or find out the train schedule or learn about child care options in a local community are public problems as well.</p>
+
+<p>These are problems that impact our experiences as citizens and neighborhood residents . The GovLab is interested in expanding the pool of individuals, organizations, and agencies that participate in addressing these issues.</p>
+
 </section>
 
 <section>
 <h2 id="courses">Courses</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Solving Public Problems With Technology (“SPPWT”) is a semester- long course through which participants (1) become proficient in current tech and design practices implemented by civic hacking communities, and (2) develop their own projects. This course  in partnership with NYU, MIT’s Media Lab, and Arizona State University, and is offered to enrolled university students for credit and to non-credit online participants. Click [here] to see SPPWT’s current syllabus.
+</p>
 
 
-{% set items = ['course 1', 'course 2', 'course 3', '...'] %}
+{% set items = [ {'title': 'Solving Public Problems with Technology', 'link': 'http://govlab.github.io/academy-courses/Solving-Public-Problems-Fall-2014/'}, { 'title': 'course 2B', 'link': '/' }, { 'title': 'course 3C', 'link': '/' }, { 'title': '...', 'link': '#' } ] %}
 <div class="b-project-list">
 <ul>
 {% for item in items %}
-  <li><a class='e-card-button' href='#'>{{item}}</a></li>
+  <li><a class='e-card-button' href='{{item.link}}'>{{item.title}}</a></li>
 {% endfor %}
 </ul>
 </div>
@@ -39,12 +37,8 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <section>
 <h2 id="coaching-programs">On-line Project Coaching Programs</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>DEFINE WHAT IT IS.
+</p>
 
 {% set items = ['coaching 1', 'coaching 2', 'coaching 3', '...'] %}
 <div class="b-project-list">
@@ -60,22 +54,47 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <section>
 <h2 id="workshops">Workshops</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Our experience is that even the most well-intended individuals tend to equate
+	the task of defining a problem with naming – and urgently getting to work on – a 
+solution. Their perfectly understandable impulse is to devote the lion’s share of 
+energy and attention to what visibly needs to get built or changed or implemented, 
+not to the painstaking, unfashionable, upstream effort to define – with true rigor 
+– what the precise problem is on which they need to focus. As a result, they waste 
+scarce time and resource and credibility on addressing symptoms, not underlying 
+causes. </p>
 
-{% set items = ['workshop 1', 'workshop 2', 'workshop 3', '...'] %}
+<p>That is why the GovLab Academy now offers a short, easily customized, 2-day 
+“problem defining” Workshop to city officials collaborating in small teams on a 
+specific issue or set of issues. Through an iterative process of deploying group 
+effort against the real issues faced by the real cities in which they work -- framing, 
+critique, revision, more critique, and revision yet again -- the Workshop helps all 
+participants master the tools, techniques, and approaches essential to the discipline 
+of genuinely rigorous problem definition.</p>
+
+<p>These Workshops have now been successfully run with teams of officials from cities 
+in both the US and Canada. “We thought we had squeezed all the sloppiness out,” 
+one noted, “ but we were wrong. It was a little embarrassing how wrong we were. 
+By tightening and tightening our understanding of the problem we were tackling, 
+we were able to shape projects that would be easier to implement and much more 
+likely to deliver real value.”</p>
+
+{% set items = [
+	{ 'title': '2-day "problem framing/defining" workshop',
+	  'location': 'Rancho Corvova, CA', 'when': 'Oct 2014', 'link': '#'},
+  { 'title': 'workshop 2', 'location': 'Otawa, Canada', 'when': 'Nov 2014' },
+  { 'title':  'workshop 3', 'location': 'Dallas, TX', 'when': 'Nov 2014' },
+  { 'title': '...', 'location': 'TBD', 'when': 'Fall 2014' }
+  ] %}
 <div class="b-project-list">
 <ul>
 {% for item in items %}
-  <li><a class='e-card-button' href='#'>{{item}}</a></li>
+  <li><a class='e-card-button' href='{{item.link}}'>{{item.title}}</a> ({{item.location}}, {{item.when}})</li>
 {% endfor %}
 </ul>
 </div>
 
 </section>
+
+</div>
 
 {% endblock %}
