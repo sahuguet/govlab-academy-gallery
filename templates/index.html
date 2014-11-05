@@ -113,6 +113,7 @@ $('div.expandable p').expander({
     expandPrefix:     ' ', // default is '... '
     expandText:       '<i class="fa fa-plus-square-o"></i>', // default is 'read more'
     collapseTimer:    0, // re-collapses after 5 seconds; default is 0, so no re-collapsing
-    userCollapseText: '<i class="fa fa-minus-square-o"></i>'  // default is 'read less'
+    userCollapseText: '<i class="fa fa-minus-square-o"></i>',  // default is 'read less'
+    afterExpand: function() { $('.details').filter(':visible').css('display', 'inline'); }
   });
   {% endblock %}
