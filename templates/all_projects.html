@@ -9,8 +9,8 @@
 <h1>Projects ({{projects|length}})</h1>
 
 <p>this is where we will put the filters once we have some decent tags.</p>
-
-{#
+ 
+{# Commented out.
 <div class="b-project-list">
 <ul>
 {% for project in projects %}
@@ -20,12 +20,41 @@
 </div>
 #}
 
+<div class="e-filters-inline filter option-set clearfix" data-filter-group="topic">
+      <a class="e-filter selected">All</a>
+      {% for topic in topics %}
+      <a class="e-filter" data-filter-value="[data-topic='{{topic}}']">{{topic}}</a>
+      {% endfor %}
+    </div>
+
+<div class="e-filters-inline filter option-set clearfix" data-filter-group="type">
+      <a class="e-filter selected">All</a>
+      {% for type in types %}
+      <a class="e-filter" data-filter-value="[data-type='{{type}}']">{{type}}</a>
+      {% endfor %}
+</div>
+
+<div class="e-filters-inline filter option-set clearfix" data-filter-group="dim">
+      <a class="e-filter selected">All</a>
+      {% for dim in dims %}
+      <a class="e-filter" data-filter-value="[data-dim='{{dim}}']">{{dim}}</a>
+      {% endfor %}
+    </div>
+
+<p><input type="text" id="quicksearch" placeholder="Search" /></p>
+
+<h3 id="item-count"></h3>
+
 <div id="project-container">
 	{% for project in projects %}
-	<div class="b-library-item m-people">
+	<div class="b-library-item m-people" id="{{project.id}}" data-topic="{{project.topic}}" data-type="{{project.type}}" data-dim="{{project.dim}}">
+		<div class="pin-it"><i class="fa fa-star-o"></i></div>
 		<div style="font-weight:bold;">{{project.project_title}}&nbsp; <a href="{{project.link}}"><i class="fa fa-external-link"></i></a></div>
 		<div class="expandable"><u>Problem</u>: <p>{{project.problem}}</p></div>
 		<div><u>Tags</u>: <p>{{project.tags}}</p></div>
+		<div><u>Fake topic</u>: <p>{{project.topic}}</p></div>
+		<div><u>Fake type</u>: <p>{{project.type}}</p></div>
+		<div><u>Fake dim</u>: <p>{{project.dim}}</p></div>
 		<div class="expandable"><u>Summary</u>: <p>{{project.summary}}</p></div>
 	</div>
 	{% endfor %}
@@ -50,12 +79,107 @@ $('div.expandable p').expander({
     afterExpand: function() { $('.details').filter(':visible').css('display', 'inline'); }
   });
 
+
+// Top-level variables.
+// Filter will be modified when the user changes filters.
 var $container = $('#project-container'), filters = {};
-$container.isotope({
-  itemSelector : '.b-library-item',
-  layoutMode: 'fitRows',
-  masonry: {
-     columnWidth: 80
-   }
-	});
+
+// quick search regex
+  var qsRegex;
+  
+  // init Isotope
+  $container.isotope({
+    itemSelector: '.b-library-item',
+    layoutMode: 'fitRows',
+    filter: function() {
+    	// This is where we do the filtering.
+    	// filter1 AND filter2 ... filterN AND full-text search.
+    	var isoFilters = [];
+  		for ( var prop in filters ) {
+    		isoFilters.push( filters[ prop ] )
+  		}
+
+  		// Starred cards are not filtered out.
+    	if ($(this).attr('data-star') != undefined) {
+    	return true;
+    	}
+    	
+    	filterSearch = true;
+    	if (isoFilters.length !=0) {
+    		filterSearch = ($(this).filter(isoFilters.join('')).length != 0)
+      }
+    	return  filterSearch && (qsRegex ? $(this).text().match( qsRegex ) : true);
+    }
+  });
+  updateCount();
+
+  // use value of search field to filter
+  var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+    qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+    $container.isotope();
+    updateCount();
+  }, 200 ) );
+  
+// debounce so filtering doesn't happen every millisecond
+function debounce( fn, threshold ) {
+  var timeout;
+  return function debounced() {
+    if ( timeout ) {
+      clearTimeout( timeout );
+    }
+    function delayed() {
+      fn();
+      timeout = null;
+    }
+    timeout = setTimeout( delayed, threshold || 100 );
+  }
+}
+
+function updateCount() {
+  $('#item-count').html($container.data('isotope').$filteredAtoms.length + " item(s) selected.");
+}
+
+$('div.pin-it').click(function() {
+	var $this = $(this);
+	var $card = $(this).parent().first();
+	var $icon = $(this).children('i').first();
+	$icon.removeClass();
+	if ($card.attr('data-star') != undefined) {
+		// Card is starred; we unstar it.
+		console.log('unstar');
+		$card.removeAttr('data-star');
+		$icon.addClass('fa fa-star-o');
+	} else {
+		// Card is not starred; we star it.
+		console.log('star');
+		$card.attr('data-star', '');
+		$icon.addClass('fa fa-star');
+	}
+});
+
+$('a.e-filter').click(function(){
+  var $this = $(this);
+  // don't proceed if already selected
+  if ( $this.hasClass('selected') ) {
+  	console.log('Already selected => do nothing.');
+    return;
+  }
+  
+  var $optionSet = $this.parents('.option-set');
+  // change selected class
+  $optionSet.find('.selected').removeClass('selected');
+  $this.addClass('selected');
+  
+
+  var group = $optionSet.attr('data-filter-group');
+  if ($this.attr('data-filter-value') != undefined) {
+  	filters[ group ] = $this.attr('data-filter-value');
+  } else {
+  delete filters[group];
+	}
+  $container.isotope();
+  updateCount();
+  return false;
+});
+
 {% endblock %}

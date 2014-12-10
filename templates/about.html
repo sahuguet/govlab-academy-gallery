@@ -26,9 +26,35 @@
 
 <section>
 	<h2>Team</h2>
-	<p>
-		PUT SOMETHING HERE
-	</p>	
+	
+<ul>
+{% for person in people %}
+	<li>{{person.name}} ({{person.clusters|join(',')}})</li>
+{% endfor %}
+</ul>
+
+<div class="e-filters-inline filter option-set clearfix" data-filter-group="cluster">
+      <a class="e-filter selected">All</a>
+      {% for cluster in all_clusters %}
+      <a class="e-filter" data-filter-value="[data-cluster~='{{cluster|skolem}}']">{{cluster}}</a>
+      {% endfor %}
+    </div>
+
+<p><input type="text" id="quicksearch" placeholder="Search" /></p>
+
+<h3 id="item-count"></h3>
+
+<div id="people-container">
+	{% for person in people %}
+	<div class="b-library-item m-people" id="{{person.id}}" data-cluster="{{person.clusters|map('skolem')|join(' ')}}">
+		<div class="pin-it"><i class="fa fa-star-o"></i></div>
+		<div style="font-weight:bold;">{{person.name}}&nbsp; <a href="{{person.link}}"><i class="fa fa-external-link"></i></a></div>
+		<div class="expandable">{{person.bio}}</div>
+	</div>
+	{% endfor %}
+</div>
+
+
 </section>
 
 <section>
@@ -37,5 +63,122 @@
 </section>
 
 </div>
+
+{% endblock %}
+
+{% block document_ready_script %}
+
+$('div.expandable p').expander({
+    slicePoint:       200,  // default is 100
+    expandPrefix:     ' ', // default is '... '
+    expandText:       '<i class="fa fa-plus-square-o"></i>', // default is 'read more'
+    collapseTimer:    0, // re-collapses after 5 seconds; default is 0, so no re-collapsing
+    userCollapseText: '<i class="fa fa-minus-square-o"></i>',  // default is 'read less'
+    afterExpand: function() { $('.details').filter(':visible').css('display', 'inline'); }
+  });
+
+
+// Top-level variables.
+// Filter will be modified when the user changes filters.
+var $container = $('#people-container'), filters = {};
+
+// quick search regex
+  var qsRegex;
+  
+  // init Isotope
+  $container.isotope({
+    itemSelector: '.b-library-item',
+    layoutMode: 'fitRows',
+    filter: function() {
+    	// This is where we do the filtering.
+    	// filter1 AND filter2 ... filterN AND full-text search.
+    	var isoFilters = [];
+  		for ( var prop in filters ) {
+    		isoFilters.push( filters[ prop ] )
+  		}
+
+  		// Starred cards are not filtered out.
+    	if ($(this).attr('data-star') != undefined) {
+    	return true;
+    	}
+    	
+    	filterSearch = true;
+    	if (isoFilters.length !=0) {
+    		console.log(isoFilters);
+    		filterSearch = ($(this).filter(isoFilters.join('')).length != 0)
+      }
+    	return  filterSearch && (qsRegex ? $(this).text().match( qsRegex ) : true);
+    }
+  });
+  updateCount();
+
+  // use value of search field to filter
+  var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+    qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+    $container.isotope();
+    updateCount();
+  }, 200 ) );
+  
+// debounce so filtering doesn't happen every millisecond
+function debounce( fn, threshold ) {
+  var timeout;
+  return function debounced() {
+    if ( timeout ) {
+      clearTimeout( timeout );
+    }
+    function delayed() {
+      fn();
+      timeout = null;
+    }
+    timeout = setTimeout( delayed, threshold || 100 );
+  }
+}
+
+function updateCount() {
+  $('#item-count').html($container.data('isotope').$filteredAtoms.length + " item(s) selected.");
+}
+
+$('div.pin-it').click(function() {
+	var $this = $(this);
+	var $card = $(this).parent().first();
+	var $icon = $(this).children('i').first();
+	$icon.removeClass();
+	if ($card.attr('data-star') != undefined) {
+		// Card is starred; we unstar it.
+		console.log('unstar');
+		$card.removeAttr('data-star');
+		$icon.addClass('fa fa-star-o');
+	} else {
+		// Card is not starred; we star it.
+		console.log('star');
+		$card.attr('data-star', '');
+		$icon.addClass('fa fa-star');
+	}
+});
+
+$('a.e-filter').click(function(){
+  var $this = $(this);
+  // don't proceed if already selected
+  if ( $this.hasClass('selected') ) {
+  	console.log('Already selected => do nothing.');
+    return;
+  }
+  
+  var $optionSet = $this.parents('.option-set');
+  // change selected class
+  $optionSet.find('.selected').removeClass('selected');
+  $this.addClass('selected');
+  
+
+  var group = $optionSet.attr('data-filter-group');
+  if ($this.attr('data-filter-value') != undefined) {
+  	filters[ group ] = $this.attr('data-filter-value');
+  } else {
+  delete filters[group];
+	}
+  $container.isotope();
+  updateCount();
+  return false;
+});
 
 {% endblock %}
