@@ -12,3 +12,5 @@ You need to install the `yaml` package first.
 
 To generate the site, simply run:
 `python generate.py`.
+
+And we are using this good example to show people how to use static sites and git.
